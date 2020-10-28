@@ -10,4 +10,6 @@ COPY . /usr/src/app
 
 EXPOSE 8080
 
+ENV PORT 9000
+
 CMD [ "node", "server.js" ]
