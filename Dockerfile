@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . /usr/src/app
 
-EXPOSE 8080
+EXPOSE 9000
 
 ENV PORT 9000
 
