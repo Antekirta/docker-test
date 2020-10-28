@@ -6,3 +6,5 @@ services:
     restart: always
     environment:
       - PORT=9000
+    ports:
+      - 9000:9000
