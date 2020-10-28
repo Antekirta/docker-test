@@ -1,6 +1,6 @@
 const http = require('http');
 
-const port = process.argv[2];
+const port = process.argv[2] || 8000;
 
 const server = http.createServer((req, res) => {
   res.end('Hello, world!');
