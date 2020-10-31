@@ -1,9 +1,11 @@
 import http, { IncomingMessage, ServerResponse } from 'http';
 
 const server = http.createServer((req : IncomingMessage, res: ServerResponse) => {
-  res.end('Hello, world!!!');
+  res.end('Hello, Serioja!');
 });
 
-server.listen(9000, () => 'Server is truly listening on port 9000');
+server.listen(9000, () => {
+  console.log('Server is truly listening on port 9000');
+});
 
 
