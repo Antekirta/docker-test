@@ -45,5 +45,4 @@ COPY . /usr/src/app
 ENV PORT 9000
 EXPOSE $PORT
 
-RUN pkill node
 CMD [ "npm", "start" ]
