@@ -39,11 +39,10 @@ ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 
 RUN node -v
 RUN npm ci
-RUN npm i nodemon -g
 
 COPY . /usr/src/app
 
 ENV PORT 9000
 EXPOSE $PORT
 
-CMD [ "nodemon", "src/backend/main.ts" ]
+CMD [ "npm run", "start" ]
