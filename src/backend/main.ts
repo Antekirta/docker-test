@@ -1,7 +1,7 @@
 import http, { IncomingMessage, ServerResponse } from 'http';
 
 const server = http.createServer((req : IncomingMessage, res: ServerResponse) => {
-  res.end('Hello, Serioja!');
+  res.end('Hello, people!');
 });
 
 server.listen(9000, () => {
