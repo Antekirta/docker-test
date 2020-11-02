@@ -43,6 +43,8 @@ RUN npm ci
 COPY . /usr/src/app
 
 ENV PORT 9000
-EXPOSE $PORT
+ENV PORT 8080
+EXPOSE 9000
+EXPOSE 8080
 
 CMD [ "npm", "start" ]
