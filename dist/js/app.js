@@ -49,8 +49,6 @@ const VChat = {
   },
   methods: {
     async submitMessage() {
-      // this.addMessage(this.message);
-
       const { name, id, text } = this.buildMessage(this.message);
 
       this.message = '';

@@ -4,4 +4,6 @@ export const root = __dirname;
 
 const serverFactory = new ServerFactory();
 
-serverFactory.createServer('http', 9000);
+const httpServer = serverFactory.createServer('http', 9000);
+
+serverFactory.createWsServer(httpServer.server);
