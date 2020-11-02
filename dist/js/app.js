@@ -1,6 +1,6 @@
 const { Vue } = window;
-// const socket = new WebSocket('ws://localhost:8080/', 'echo-protocol');
-const socket = new WebSocket('ws://81.163.28.33:8080/', 'echo-protocol');
+const socket = new WebSocket('ws://localhost:8080/', 'echo-protocol');
+// const socket = new WebSocket('ws://81.163.28.33:8080/', 'echo-protocol');
 
 
 const VChat = {
@@ -74,10 +74,14 @@ const VChat = {
     },
     
     buildMessage() {
+      const lastMessage = this.messages[this.messages.length - 1];
+      
       return {
         name: this.name,
         text: this.message,
-        id: this.messages[this.messages.length - 1].id + 1 || 1
+        id: lastMessage
+          ? lastMessage.id + 1
+          : 1
       };
     },
     
