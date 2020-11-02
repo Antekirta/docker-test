@@ -1,5 +1,6 @@
 const { Vue } = window;
-const socket = new WebSocket('ws://localhost:8080/', 'echo-protocol');
+// const socket = new WebSocket('ws://localhost:8080/', 'echo-protocol');
+const socket = new WebSocket('ws://81.163.28.33:8080/', 'echo-protocol');
 
 
 const VChat = {
