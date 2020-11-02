@@ -26,18 +26,34 @@ class HttpServer {
     
     onRequest(req : IncomingMessage, res: ServerResponse) {
       try {
-        const { type, payload } = router.get(req);
+        const { method } = req;
+        
+        if (method === 'GET') {
+          const { type, payload } = router.get(req);
 
-        if (type === 'view') {
-          this.renderer.render(payload)
-            .then((data) => res.end(data))
-            .catch((err) => res.end(err));
-        } else if (type === 'text-resource') {
-          this.resourcesLoader.load(payload)
-            .then((data) => res.end(data))
-            .catch((err) => res.end(err));
-        } else if (type === 'image') {
-          // load image
+          if (type === 'view') {
+            this.renderer.render(payload)
+              .then((data) => res.end(data))
+              .catch((err) => res.end(err));
+          } else if (type === 'text-resource') {
+            this.resourcesLoader.load(payload)
+              .then((data) => res.end(data))
+              .catch((err) => res.end(err));
+          } else if (type === 'image') {
+            // load image
+          }   
+        } else if (method === 'POST') {
+          let body = '';
+
+          req.on('data', (data) => {
+            console.log('data: ', JSON.parse(data.toString()));
+            
+            body += data.toString();
+          });
+          
+          req.on('end', () => {
+            res.end(body);
+          });
         }
       } catch (err) {
         console.error(err);
