@@ -15,8 +15,10 @@ export default class WsServer {
     private clients = new Set()
 
     constructor(httpServer : Server) {
+      console.log('Init WS!');
+        
       this.server = new WebSocketServer({
-        httpServer: httpServer,
+        httpServer,
         autoAcceptConnections: true
       });
       
@@ -24,17 +26,17 @@ export default class WsServer {
     }
 
     private onRequest(req : ws.request) : void {
-      this.initConnection(req);
-
       console.log(`${new Date()} Connection accepted.`);
+        
+      this.initConnection(req);
     }
     
     private initConnection(req : ws.request) {
       this.connection = req.accept('echo-protocol', req.origin);
         
-      this.connection.addListener('message', this.onMessage.bind(this));
+      this.connection.on('message', this.onMessage.bind(this));
 
-      this.connection.addListener('close', this.onClose.bind(this));
+      this.connection.on('close', this.onClose.bind(this));
     }
 
     private onMessage(message : IMessage) : void {
@@ -49,6 +51,5 @@ export default class WsServer {
 
     private onClose() :void {
       console.log(`${new Date()} Peer ${this.connection.remoteAddress} disconnected.`);
-
     }
 }

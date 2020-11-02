@@ -9,17 +9,22 @@ export default class HttpServer {
     private readonly renderer : Render = {} as Render;
     private readonly resourcesLoader : ResourcesLoader = {} as ResourcesLoader;
     public readonly server: Server = {} as Server
+    private readonly port : number
 
     constructor(port : number) {
+      this.port = port;
+
       this.renderer = new Render();
 
       this.resourcesLoader = new ResourcesLoader();
 
       this.server = http.createServer(this.onRequest.bind(this));
-        
-      this.server.listen(port, () => {
-        console.log(`Server is listening on port ${port}`);
-      });
+    }
+
+    run() : void {
+      this.server.listen(this.port, () => {
+        console.log(`Server is listening on port ${this.port}`);
+      }); 
     }
     
     onRequest(req : IncomingMessage, res: ServerResponse) : void {
@@ -40,19 +45,20 @@ export default class HttpServer {
           } else if (type === 'image') {
             // load image
           }   
-        } else if (method === 'POST') {
-          let body = '';
-
-          req.on('data', (data) => {
-            console.log('data: ', JSON.parse(data.toString()));
-            
-            body += data.toString();
-          });
-          
-          req.on('end', () => {
-            res.end(body);
-          });
         }
+        // else if (method === 'POST') {
+        //   let body = '';
+        //
+        //   req.on('data', (data) => {
+        //     console.log('data: ', JSON.parse(data.toString()));
+        //
+        //     body += data.toString();
+        //   });
+        //
+        //   req.on('end', () => {
+        //     res.end(body);
+        //   });
+        // }
       } catch (err) {
         console.error(err);
       }

@@ -6,4 +6,6 @@ const serverFactory = new ServerFactory();
 
 const httpServer = serverFactory.createServer('http', 9000);
 
-serverFactory.createWsServer(httpServer.server);
+httpServer.run();
+
+serverFactory.createWsServer();

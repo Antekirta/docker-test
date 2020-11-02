@@ -1,4 +1,6 @@
-const { axios, Vue } = window;
+const { Vue } = window;
+const socket = new WebSocket('ws://localhost:8080/', 'echo-protocol');
+
 
 const VChat = {
   name: 'VChat',
@@ -47,24 +49,34 @@ const VChat = {
       messages: []
     };
   },
+  mounted() {
+    socket.onmessage = ({ data }) => {
+      const message = JSON.parse(data);
+
+      this.addMessage({
+        ...message,
+        text: message.message
+      });
+    };
+  },
   methods: {
     async submitMessage() {
       const { name, id, text } = this.buildMessage(this.message);
 
       this.message = '';
 
-      await axios.post('/api/message', {
+      socket.send(JSON.stringify({
         id,
         name,
         message: text
-      });
+      }));
     },
     
     buildMessage() {
       return {
         name: this.name,
         text: this.message,
-        id: this.messages[this.messages.length - 1] + 1 || 1
+        id: this.messages[this.messages.length - 1].id + 1 || 1
       };
     },
     

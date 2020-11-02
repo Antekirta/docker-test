@@ -1,5 +1,5 @@
 import HttpServer from './http-server';
-import WsServer from './ws-server';
+import WsServer from './ws-server-native';
 import { Server } from 'http';
 
 type serverType = 'http' | 'ws' | 'tcp'
@@ -15,7 +15,7 @@ export default class ServerFactory {
     return new serverTypes[type](port);
   }
   
-  createWsServer(httpServer : Server) : WsServer {
-    return new WsServer(httpServer);
+  createWsServer() : WsServer {
+    return new WsServer();
   }
 }
