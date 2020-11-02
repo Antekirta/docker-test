@@ -7,6 +7,9 @@
     "start": "ts-node src/backend/main.ts",
     "watch": "nodemon -L src/backend/main.ts"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
