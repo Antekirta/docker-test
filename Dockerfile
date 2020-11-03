@@ -42,6 +42,6 @@ RUN npm ci
 
 COPY . /usr/src/app
 
-EXPOSE 9000 8080
+EXPOSE 9000 8080/tcp
 
 CMD [ "npm", "start" ]
